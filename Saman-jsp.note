@@ -1,0 +1,304 @@
+* To print text out to the html
+	<%
+	out.print("your string");
+	out.println("your string");	
+	
+	%>
+
+
+* Different between Attribute and Paramenter (JSP)
+	- setParameter()	/ getParameter()	: return String, which passed form client to server.
+	
+	- setAttribute()	/ getAttribute()	: return Object, and used for server-side only.
+
+
+* Get data from other jsp form.
+	request.getParameter("TheInputName");  		//Name of the input field. But here is the best practic  ${param.TheInputName}
+
+
+	* In the form jsp file
+		<form action="welcome.jsp">  
+			<input type="text" name="uname">  
+			<input type="submit" value="go"><br/>  
+		</form>  
+
+	* In welcome.jsp file
+		<%
+		String name=request.getParameter("uname"); 	
+		...	
+		%>	
+		<h1>${param.uname}</h1>		
+
+
+
+* Redirect to address
+	<%
+	response.sendRedirect("http://www.google.com");  
+
+	%>
+
+
+
+* Session	(Its attributes can be call from any JSP)
+	<%
+	session.setAttribute("Key","Value");  		//set an attribute
+	...		
+	
+	%>
+
+	<%
+	session.getAttribute("Kye");			//get the value from its key. This can be writen in other jsp file	
+	...
+	%>
+	<h1>${sessionScope.Key}</h1>			//Get the value from session on html.
+
+
+* Cookies
+
+		<%  
+		Cookie ck = new Cookie("keyName","value");  
+		response.addCookie(ck);  
+
+		%> 
+		
+		<%
+		<h1>${cookie.keyName.value}</h1>
+
+		%>
+
+
+	* Here’s how things works.
+
+		1. When you authenticate in an web site using cookie and session based auth you’ll receive in the response from the server a header telling 
+		   “Hey, I just created a session identified by the key 123456”
+		2. Your browser stores the session id.
+		3. From now on every time you call this website you send a cookie header with the value 123456 o the server knows who you are.
+
+
+
+* (Session) Token based authorization works like that.	(It's similarly to the cookie, thought)
+
+	1. You pass your info to the servers via HTTP POST.
+	2. The server authorizes you.
+	3. The server sent you a encrypted token with some secret information you should not know about like “this user ID is ABC” or “this user has admin role.” Whatever the token issuer (server) wants.
+	4. You store this token somewhere (a variable or localStorage if you want to persist it).
+	5. Every time you need to call the server, you pass the token via Authorization header in the request.
+
+
+* pageContext implicit object	(Used to set ,get or remove attribute from a scope)	(Scope: page, request, session, application)
+	
+	<%
+	pageContext.setAttribute("Key", "Value", PageContext.SESSION_SCOPE);  		//Set an attribute in scope session
+	...
+
+	pageContext.getAttribute("Key", PageContext.SESSION_SCOPE);			//get attr in scope session
+	...
+	%>
+
+* 9 exception implicit object
+	In JSP, exception is an implicit object of type java.lang.Throwable class. This object can be used to print the exception. But it can only be used in error pages.It is better to learn it after page directive.
+
+	*In the jsp which you want to catch error add the below line at the top.
+
+		<%@ page errorPage="error.jsp" %>  
+
+
+	* Create a JSP file which you'll show some error message like: error.jsp
+		
+		<%= exception %>
+
+
+
+* The jsp directives are messages that tells the web container how to translate a JSP page into the corresponding servlet.
+
+	There are three types of directives:
+
+	 1. page directive
+	 2. include directive
+	 3. taglib directive
+
+
+	*Syntax
+		<%@ directive attribute="value" %>  
+
+		EX:
+			<%@ page attribute="value" %>  
+
+	* Attributes of JSP page directive
+		- import		:Similarly to import in java class like: <%@ page import="java.util.Date" %>  
+		- contentType		:The default value is "text/html;charset=ISO-8859-1".		Ex:	<%@ page contentType=application/msword %>  
+		- extends		:The extends attribute defines the parent class that will be inherited by the generated servlet.
+		- info			: 
+		- buffer		:Set buffer size in KB	like: <%@ page buffer="16kb" %>  										
+		- language		:Default value is java.
+		- isELIgnored		:
+		- isThreadSafe
+		- autoFlush
+		- session
+		- pageEncoding
+		- errorPage		:Redirect to the error page when the exception is occured.	Ex: <%@ page errorPage="myerrorpage.jsp" %>  
+		- isErrorPage		:Declare to catch any exception which could be occure in the current page.	Ex: <%@ page isErrorPage = "true" %>
+			
+
+* Include directive
+	- include 	:Ex: <%@ include file="header.jsp" %>  
+
+
+* Taglib directive		(The JSP taglib directive is used to define a tag library)
+
+	Ex: <%@ taglib uri="http://www.javatpoint.com/tags" prefix="mytag" %>  
+
+
+
+
+
+
+** Java Bean
+
+	Ex:
+	 -Backend:
+	
+		package com.javatpoint;  
+		public class Calculator{  
+		  
+		public int cube(int n){return n*n*n;}  
+		  
+		}  
+
+	-Front end
+		<jsp:useBean id="obj" class="com.javatpoint.Calculator"/>  
+  
+		<%  
+		int m = obj.cube(5);  
+		out.print("cube of 5 is "+m);  
+		%>  
+	
+
+* JSTL Core Tags
+
+	c:out		: Ex: <c:out value = "..."/>
+	c:import	
+	c:set		: Ex: <c:set var="Income" scope="session" value="${4000*4}"/> 	:to get value ${Income}
+	c:remove	: It is used for removing the specified variable from a particular scope. can also clean up any scope resources  Ex: <c:remove var="income"/> 	
+	c:catch		: 
+	    Ex:
+		<c:catch var ="exc">  
+		   <% int x = 2/0;%>  
+		</c:catch>  
+		  
+		<c:if test = "${exc != null}">  
+		   The type of exception is : ${exc} <br />  
+		   There is an exception: ${exc.message}
+		</c:if>  
+
+	c:if		:
+
+		Ex:
+			<c:set var="income" scope="session" value="${4000*4}"/>  
+
+			<c:if test="${income > 8000}">  
+			   ...
+  
+			</c:if> 
+
+	c:choose	:
+
+		Ex:
+			<c:set var="income" scope="session" value="${4000*4}"/>  
+			  
+			<c:choose>  
+			    <c:when test="${income <= 1000}">  
+			       ...
+
+			    </c:when>  
+			    <c:when test="${income > 10000}">  
+				...
+
+			    </c:when>  
+			    <c:otherwise>  
+			       ...
+ 
+			    </c:otherwise>  
+			</c:choose>  
+
+	
+	c:forEach	:
+		Ex: 
+			<c:forEach var="youCollection" begin="1" end="3"> 
+
+			   Item <c:out value="${youCollection}"/><p>  
+
+			</c:forEach>
+
+	c:forTokens	: The < c:forTokens > tag iterates over tokens which is separated by the supplied delimeters. It is used for break a string into tokens and iterate through each of the tokens to generate output.
+		Ex: 
+			<c:forTokens items="Rahul-Nakul-Rajesh" delims="-" var="name">  
+
+			   <c:out value="${name}"/><p>  
+
+			</c:forTokens>
+
+	c:param		
+	c:redirect	: Ex: <c:set var="url" value="0" scope="request"/>  
+	c:url		: The < c:url > tag creates a URL with optional query parameter. It is used for url encoding or url formatting
+		Ex:
+			<c:url value = "/pathto/yours.jsp"/>
+
+
+
+*JSTL Function Tags	
+
+	1) fn:contains(String string, String find)		
+		Ex: (As this example you can use all the function below with <c:if > or <c:choose >)
+			<c:if test="${fn:contains('hello world candy', 'candy')}">  
+				...
+				
+			</c:if>
+
+	2) fn:containsIgnoreCase(String string, String find)
+
+	3) fn:endsWith(String string, String end)
+
+	4) fn:escapeXml(String string)		:  It is used for escaping the character in XML markup language.
+
+	5) fn:indexOf()
+
+	6) fn:trim()
+
+	7) fn:startsWith()
+
+	8) fn:split()
+
+	9) fn:toLowerCase()
+
+	10) fn:toUpperCase()
+
+	11) fn:substring()
+
+	12) fn:substringAfter()
+
+	13) fn:substringBefore()
+
+	14) fn:length()
+
+	15) fn:replace()
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

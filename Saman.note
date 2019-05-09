@@ -238,7 +238,7 @@
 
 			</c:forTokens>
 
-	c:param		:
+	c:param		
 	c:redirect	: Ex: <c:set var="url" value="0" scope="request"/>  
 	c:url		: The < c:url > tag creates a URL with optional query parameter. It is used for url encoding or url formatting
 		Ex:
@@ -246,10 +246,10 @@
 
 
 
-*JSTL Function Tags		(mostly like group string function of java)
+*JSTL Function Tags	
 
 	1) fn:contains(String string, String find)		
-		Ex: 
+		Ex: (As this example you can use all the function below with <c:if > or <c:choose >)
 			<c:if test="${fn:contains('hello world candy', 'candy')}">  
 				...
 				
@@ -257,82 +257,39 @@
 
 	2) fn:containsIgnoreCase(String string, String find)
 
-	3) fn:endsWith(String string, String end)	return True/false
+	3) fn:endsWith(String string, String end)
 
 	4) fn:escapeXml(String string)		:  It is used for escaping the character in XML markup language.
 
-	5) fn:indexOf(String string, String find)	: find where the "find" is.
+	5) fn:indexOf()
 
-	6) fn:trim(String input)		: return trimed string (remove multiple white space between words)
+	6) fn:trim()
 
-	7) fn:startsWith(String word)
+	7) fn:startsWith()
 
-	8) fn:split(String string, String splite)	:return array of String 
-			 
-	8.1) fn:join(String[] str, String separator) 	:return string
+	8) fn:split()
 
-	9) fn:toLowerCase(String string)
+	9) fn:toLowerCase()
 
-	10) fn:toUpperCase(String string)
+	10) fn:toUpperCase()
 
-	11) fn:substring(String string, int start, int end)
+	11) fn:substring()
 
-	12) fn:substringAfter(String string, String word)
+	12) fn:substringAfter()
 
-	13) fn:substringBefore(String string, String word)
+	13) fn:substringBefore()
 
-	14) fn:length(Object o)		: return int
+	14) fn:length()
 
-	15) fn:replace(String string, String find, String replacer)
+	15) fn:replace()
 	
 
-* JSTL Formatting Tags			:  <fmt:parseNumber var="variable" type="number" value="${Amount}" />  	: call it    ${variable}
-	
-	1) fmt:parseNumber open link
-	2) fmt:timeZone 
-	3) fmt:formatNumber
-	4) fmt:parseDate
-	5) fmt:bundle
-	6) fmt:setTimeZone
-	7) fmt:setBundle
-	8) fmt:message
-	9) fmt:formatDate
 
 
 
 
-* Prevent the output of my JSP or Servlet pages from being cached by the browser
-	<%  
-	response.setHeader("Cache-Control","no-store");   
-	response.setHeader("Pragma","no-cache");   
-	response.setHeader ("Expires", "0"); //prevents caching at the proxy server  
-	%>   
 
-* BUILDING FORMS WITH AUI TAGS
 
-	<aui:input type = "" name = "" label = ""/>
-
-	<aui:button type = "" value = ""/>
-
-	<aui:button-row>
-
-	<aui:container>
-
-	<aui:col>
-
-	<aui:row>
-
-	<aui:field-wrapper>
-
-	<aui:fieldset label = "">
-
-	<aui:fieldset-group>
-
-	<aui:form action = "" method = "" name = "">
-
-	<aui:select>
-
-	<aui:option>
 
 
 

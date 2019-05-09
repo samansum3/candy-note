@@ -1,0 +1,9 @@
+* Delete remote branch
+	git branch -d your-branch-name	//Delete local branch
+	
+	git push origin --delete your-branch-name	
+
+
+* Push to git hub after commited 
+	 git push -u origin add-warning-message-on-my-profile 
+

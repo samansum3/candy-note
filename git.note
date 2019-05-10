@@ -7,3 +7,7 @@
 * Push to git hub after commited 
 	 git push -u origin add-warning-message-on-my-profile 
 
+
+* Maintain commit
+	git rebase -i commitId		(CommitID which take from gitk)	then the nano will open for your change.
+	

@@ -11,3 +11,5 @@
 * Maintain commit
 	git rebase -i commitId		(CommitID which take from gitk)	then the nano will open for your change.
 	
+	then:
+	git push -f 	//to push the recent chnage to the git repository

@@ -13,3 +13,7 @@
 	
 	then:
 	git push -f 	//to push the recent chnage to the git repository
+
+
+* Get commit into your new branch
+	git cherry-pick commitID	//The id which you could get form the git repository -> commit (This would help when you want to use new branch)

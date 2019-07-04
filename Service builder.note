@@ -1,0 +1,10 @@
+service.xml
+    where to build the entities.
+
+*If @Reference is not work then use @ServiceReference or @BeenReference
+
+**Note**
+	In case you want to recreate table or use the exist service-builder to create more table
+	- after finish on the service.xml and buildService then go to the database and delete any rows of the service-builder you're working on on two table
+		- (Table) Release_ and (table) ServiceComponent
+	then deploy your code.

@@ -1,0 +1,33 @@
+* USE 'aui-node'    :
+
+Get an element:
+    A.one('.elementClass');      
+    or: 
+    A.one('#myElement');
+
+    
+Get multiple elements:
+    A.all('.box');
+    
+
+Add content ot element:
+    A.one('.box').html('<p> ... </p>');
+
+
+Append content to element:
+    Y.one('.box p').placeAfter('<p> ... </p>');
+
+Clear element:
+    Y.one('#box').empty();
+
+
+
+
+
+
+
+
+
+
+
+

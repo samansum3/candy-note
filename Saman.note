@@ -178,7 +178,7 @@
 
 	c:out		: Ex: <c:out value = "..."/>
 	c:import	
-	c:set		: Ex: <c:set var="Income" scope="session" value="${4000*4}"/> 	:to get value ${Income}
+	c:set		: Ex: <c:set var="Income" scope="session" value="${4000*4}"/> 	:to get value ${Income}	
 	c:remove	: It is used for removing the specified variable from a particular scope. can also clean up any scope resources  Ex: <c:remove var="income"/> 	
 	c:catch		: 
 	    Ex:
